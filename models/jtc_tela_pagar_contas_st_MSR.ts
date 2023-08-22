@@ -24,8 +24,6 @@ export const onRequest = (ctx: EntryPoints.Suitelet.onRequestContext) => {
             if(ctx.request.parameters.custpage_check == "T"|| ctx.request.parameters.custpage_check == true) {
                 const body = ctx.request.parameters
 
-                const data_de = body.custpage_date_de
-                const data_ate = body.custpage_date_ate
                 const sublist = String(body.custpage_sublista_contasdata).split("/\u0001/")
                 const lines = String(sublist[0]).split("\u0002")
                 const dt_pgamento = body.custpage_data_pg
@@ -90,12 +88,7 @@ export const onRequest = (ctx: EntryPoints.Suitelet.onRequestContext) => {
 const getForm = (form: UI.Form, ctx: EntryPoints.Suitelet.onRequestContext) => {
     try {
 
-        const fornecedor = form.addField({
-            id: CTS.FORM.FILTERS.FORNECEDOR.ID,
-            label: CTS.FORM.FILTERS.FORNECEDOR.LABEL,
-            type: UI.FieldType.SELECT,
-            source: String(record.Type.VENDOR)
-        })
+        
         const data_de = form.addField({
             id: CTS.FORM.FILTERS.DATA_DE.ID,
             label: CTS.FORM.FILTERS.DATA_DE.LABEL,
@@ -123,7 +116,6 @@ const postForm = (form: UI.Form, ctx: EntryPoints.Suitelet.onRequestContext) => 
     try {
 
         const body = ctx.request.parameters
-        const vendor = body.custpage_vendor
         const data_de = body.custpage_date_de
         const data_ate = body.custpage_date_ate
 
@@ -149,10 +141,6 @@ const postForm = (form: UI.Form, ctx: EntryPoints.Suitelet.onRequestContext) => 
             source: 'account'
         })
 
-        if (!!vendor) {
-            filters.push([CTS.VENDOR_BILL.FORNECEDOR, search.Operator.ANYOF, vendor ])
-            filters.push("AND")
-        }
 
 
         if (!!data_de && !!data_ate) {
