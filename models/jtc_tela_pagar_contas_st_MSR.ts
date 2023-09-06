@@ -188,7 +188,7 @@ const postForm = (form: UI.Form, ctx: EntryPoints.Suitelet.onRequestContext) => 
                 search.createColumn({name: CTS.VENDOR_BILL.DATA_VENCIMENTO}),
                 search.createColumn({name: CTS.VENDOR_BILL.VALOR})
             ]
-        }).run().getRange({start: 0, end: 30})
+        }).run().getRange({start: 0, end: 100})
 
 
         log.debug('seachrVendorBill', searchVendorBill)
